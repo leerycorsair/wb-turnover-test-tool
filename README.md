@@ -73,7 +73,7 @@ pip install -r ./requirements.txt
 
 3) Предполагается, что данные по Ежедневным финансовым отчетам были получены на предыдущем шаге и находятся по пути `data/02_02_daily_reports_filtered.xlsx`. 
 
-4) Для каждой из нм в файле `data/02_02_daily_reports_filtered.xlsx` будет выполнена попытка расчета оборачиваемости.
+4) Для каждой из нм в файле `data/02_02_daily_reports_filtered.xlsx` будет выполнена попытка расчета оборачиваемости по данным из `data/03_stock_history.xlsx`. В случае если соответствующей нм нет в `data/03_stock_history.xlsx`, то для нее присваивается флаг `is_found = False`.
 
 5) Запустить скрипт `03_calc_turnover.py`.
 
