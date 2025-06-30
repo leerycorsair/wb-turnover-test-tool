@@ -34,7 +34,7 @@ pip install -r ./requirements.txt
 
 1) Установить Google Chrome.
 
-2) [Скачать](https://googlechromelabs.github.io/chrome-for-testing/) ChromeDevTools, такой же [версии](chrome://settings/help) как браузер и распаковать в директорию проекта.
+2) [Скачать](https://googlechromelabs.github.io/chrome-for-testing/) ChromeDevTools такой же [версии](chrome://settings/help) как браузер и распаковать в директорию проекта.
 
 3) В файле `config` задать `USER_DATA_DIR` для описания пути сохранения данных тестового профиля.
 
