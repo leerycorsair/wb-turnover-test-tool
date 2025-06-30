@@ -4,6 +4,8 @@ import logging
 import time
 
 USER_DATA_DIR = "SOME PATH"
+TARGET_PERIOD_START = "01-06-2025"
+TARGET_PERIOD_END = "29-06-2025"
 
 
 logging.basicConfig(

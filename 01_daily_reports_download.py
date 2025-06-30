@@ -5,10 +5,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from config import USER_DATA_DIR, logger
-
-TARGET_PERIOD_START = "01-06-2025"
-TARGET_PERIOD_END = "29-06-2025"
+from config import TARGET_PERIOD_END, TARGET_PERIOD_START, USER_DATA_DIR, logger
 
 
 BASE_URL = "https://seller.wildberries.ru/suppliers-mutual-settlements/reports-implementations/reports-daily"

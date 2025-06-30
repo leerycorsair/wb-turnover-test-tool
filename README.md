@@ -11,7 +11,7 @@
 3) Создать виртуальное окружение для проекта.
 
 ```shell
-python -m venv venvс
+python -m venv venv
 ```
 
 4) Активировать виртуальное окружение для проекта.
@@ -44,7 +44,7 @@ pip install -r ./requirements.txt
 
 Порядок действий:
 
-1) Задать интересующий период соответствующими константами `TARGET_PERIOD_START` и `TARGET_PERIOD_END`.
+1) Задать интересующий период соответствующими константами `TARGET_PERIOD_START` и `TARGET_PERIOD_END` в файле `config.py`.
 
 2) Запустить скрипт `01_daily_reports_download.py`.
 
@@ -56,11 +56,11 @@ pip install -r ./requirements.txt
 
 1) Предполагается, что множество архивов для слияния находится в директории `data/01-daily-reports-downloads`.
 
-2) Константа `TARGET_DAY` задает расчетный день, по которому будут отфильтрованы данные.
+2) Задать интересующий период соответствующими константами `TARGET_PERIOD_START` и `TARGET_PERIOD_END` в файле `config.py`.
 
 3) Запустить скрипт `02_daily_reports_process.py`.
 
-4) `02_01_daily_reports_merged.xlsx` --- данные после слияния, `02_02_daily_reports_filtered.xlsx` --- данные после фильтрации по расчетному дню и Типу операции.
+4) `02_01_daily_reports_merged.xlsx` --- данные после слияния, `02_02_daily_reports_filtered.xlsx` --- данные после фильтрации по нужному периоду и Типу операции.
 
 
 ## 03 - Расчет оборачиваемости для конкретной нм

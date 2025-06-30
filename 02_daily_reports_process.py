@@ -3,13 +3,12 @@ from typing import List
 import zipfile
 import pandas as pd
 from tqdm import tqdm
-from config import logger
+from config import TARGET_PERIOD_END, TARGET_PERIOD_START, logger
 
 BASE_DIR = os.path.dirname(__file__)
 ZIP_DIR = os.path.join(BASE_DIR, "data/01-daily-reports-downloads")
 MERGED_FILE = os.path.join(BASE_DIR, "data/02_01_daily_reports_merged.xlsx")
 FILTERED_FILE = os.path.join(BASE_DIR, "data/02_02_daily_reports_filtered.xlsx")
-TARGET_DAY = "2025-06-05"
 
 
 def extract_excel_from_zip(zip_path: str) -> pd.DataFrame:
@@ -45,19 +44,21 @@ def merge_daily_reports(zip_dir: str) -> pd.DataFrame:
     )
 
 
-def filter_daily_reports(src: pd.DataFrame, target_day: str) -> pd.DataFrame:
+def filter_daily_reports(
+    src: pd.DataFrame, period_start: str, period_end: str
+) -> pd.DataFrame:
+
+    start_date = pd.to_datetime(period_start, format="%d-%m-%Y")
+    end_date = pd.to_datetime(period_end, format="%d-%m-%Y")
+
+    src["Дата продажи"] = pd.to_datetime(
+        src["Дата продажи"], errors="coerce", format="%Y-%m-%d"
+    )
+
     dst = src[
-        (src["Дата продажи"] == target_day)
-        & (
-            (
-                (src["Тип документа"] == "Продажа")
-                | (src["Обоснование для оплаты"] == "Продажа")
-            )
-            | (
-                (src["Тип документа"] == "Возврат")
-                | (src["Обоснование для оплаты"] == "Возврат")
-            )
-        )
+        (src["Дата продажи"] >= start_date)
+        & (src["Дата продажи"] <= end_date)
+        & (src["Обоснование для оплаты"].isin(["Продажа", "Возврат"]))
         & (~src["Склад"].str.contains("Склад поставщика", na=False))
     ]
 
@@ -72,7 +73,7 @@ def run_reports_process() -> None:
         logger.info("Merged data is empty!")
 
     filtered_daily_reports_df = filter_daily_reports(
-        merged_daily_reports_df, TARGET_DAY
+        merged_daily_reports_df, TARGET_PERIOD_START, TARGET_PERIOD_END
     )
     if not filtered_daily_reports_df.empty:
         filtered_daily_reports_df.to_excel(FILTERED_FILE, index=False)
